@@ -6,5 +6,16 @@
   "implicitDependencies": [
     "sdk-types"
   ],
-  "targets": {}
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "cache": true,
+      "dependsOn": [
+        "^build"
+      ],
+      "options": {
+        "jestConfig": "frontend/libs/feature-portfolio/jest.config.js"
+      }
+    }
+  }
 }
