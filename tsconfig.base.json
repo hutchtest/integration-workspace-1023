@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@app/sdk-types": [
+        "frontend/libs/sdk-types/src/index.js"
+      ]
+    }
+  }
+}

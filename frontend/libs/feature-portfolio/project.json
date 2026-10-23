@@ -1,0 +1,10 @@
+{
+  "name": "feature-portfolio",
+  "root": "frontend/libs/feature-portfolio",
+  "sourceRoot": "frontend/libs/feature-portfolio/src",
+  "projectType": "library",
+  "implicitDependencies": [
+    "sdk-types"
+  ],
+  "targets": {}
+}

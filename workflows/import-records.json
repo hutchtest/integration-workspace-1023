@@ -1,0 +1,22 @@
+{
+  "name": "Import records",
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "return $input.all();\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "normalize-records",
+      "name": "Normalize records"
+    }
+  ],
+  "connections": {},
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

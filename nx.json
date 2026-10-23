@@ -1,0 +1,27 @@
+{
+  "namedInputs": {
+    "default": [
+      "{projectRoot}/**/*"
+    ],
+    "production": [
+      "default",
+      "!{projectRoot}/**/*.spec.js"
+    ]
+  },
+  "targetDefaults": {
+    "@nx/jest:jest": {
+      "cache": true,
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "default",
+        "^production",
+        {
+          "dependentTasksOutputFiles": "**/*",
+          "transitive": true
+        }
+      ]
+    }
+  }
+}

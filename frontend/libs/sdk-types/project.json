@@ -1,0 +1,24 @@
+{
+  "name": "sdk-types",
+  "root": "frontend/libs/sdk-types",
+  "sourceRoot": "frontend/libs/sdk-types/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "inputs": [
+        "default",
+        {
+          "env": "SCHEMA_REVISION"
+        }
+      ],
+      "outputs": [
+        "{projectRoot}/src/generated"
+      ],
+      "options": {
+        "command": "node tools/generate-sdk.mjs"
+      }
+    }
+  }
+}
