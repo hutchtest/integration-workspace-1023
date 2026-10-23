@@ -1,6 +1,6 @@
 /** Formatting helpers for catalogue section 24. */
 const SECTION = 24;
-function enabled(entry) { return entry.enabled !== false; }
+const enabled = entry => entry.enabled !== false;
 function score(entry) {
   return typeof entry.score === 'number' && Number.isFinite(entry.score) ? entry.score : 0;
 }
@@ -21,7 +21,9 @@ function limit(entries, requested) {
 }
 export function listSection(entries, requested) {
   const values = Array.isArray(entries) ? entries : [];
-  return limit(values.filter(enabled).slice().sort(compare), requested).map(describe);
+  const ordered = values.filter(enabled).slice().sort(compare);
+  const selected = limit(ordered, requested);
+  return selected.map(describe);
 }
 export function findSection(entries, id) {
   return listSection(entries).find(entry => entry.id === id);
