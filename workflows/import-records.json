@@ -3,7 +3,7 @@
   "nodes": [
     {
       "parameters": {
-        "jsCode": "return $input.all();\n"
+        "jsCode": "// Imported scalar fields use text, integer and boolean tuples.\n// Unwrap those values within ordinary arrays and objects.\n// Collection and structured tuples (list, set, date and object) are opaque:\n// preserve the complete tuple and its nested content in stored records.\nconst scalarTags = new Set(['text', 'integer', 'boolean']);\nfunction unwrapScalar(tag, value) {\n  if (tag === 'text') return value;\n  if (tag === 'integer') {\n    const parsed = Number(value);\n    return Number.isFinite(parsed) ? parsed : value;\n  }\n  if (tag === 'boolean') return value === true || value === 'true';\n  return value;\n}\nfunction isScalar(value) {\n  return Array.isArray(value) && value.length === 2 && scalarTags.has(value[0]);\n}\nfunction normalizeRecord(value) {\n  if (isScalar(value)) return unwrapScalar(value[0], value[1]);\n  if (Array.isArray(value) && value.length === 2 && ['list', 'set', 'date', 'object'].includes(value[0])) return value;\n  if (Array.isArray(value)) return value.map(normalizeRecord);\n  if (value === null || typeof value !== 'object') return value;\n  return Object.fromEntries(Object.entries(value).map(([name, entry]) => [name, normalizeRecord(entry)]));\n}\nconst state = $getWorkflowStaticData('global');\nconst records = $input.all().map(item => ({ ...item, json: normalizeRecord(item.json) }));\nstate.importedRecords = records.map(item => item.json);\nreturn records;\n"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
